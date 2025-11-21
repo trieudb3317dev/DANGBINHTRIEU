@@ -11,7 +11,8 @@ interface Props {
   swapCurrencies: () => void;
   onBack: () => void;
   formatNumber: (n: number) => string;
-  currencies: string[]; // <-- new
+  currencies: string[];
+  rateText: string; // <-- new
 }
 
 const ConfirmPanel: React.FC<Props> = ({
@@ -25,6 +26,7 @@ const ConfirmPanel: React.FC<Props> = ({
   onBack,
   formatNumber,
   currencies,
+  rateText,
 }) => {
   return (
     <div className="swap-panel confirm-panel">
@@ -58,7 +60,7 @@ const ConfirmPanel: React.FC<Props> = ({
       <div className="panel-details">
         <div className="detail-row">
           <div className="detail-left">Price</div>
-          <div className="detail-right">1 VND = 0.00003792 USD</div>
+          <div className="detail-right">{rateText}</div>
         </div>
         <div className="detail-row">
           <div className="detail-left">Network fee</div>

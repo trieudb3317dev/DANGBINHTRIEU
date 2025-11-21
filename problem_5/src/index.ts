@@ -27,7 +27,9 @@ import categoryRouter from './routers/category.router';
 import productRouter from './routers/product.router';
 import uploadRouter from './routers/upload.router';
 
-app.use(cors());
+app.use(cors({
+  origin: '*',
+}));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -37,6 +39,11 @@ const API_PREFIX = '/api/v1';
 // serve swagger ui
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+// Expose raw OpenAPI JSON for debugging (useful on deployed host)
+app.get('/api-docs.json', (req: Request, res: Response) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
 
 // Routes
 

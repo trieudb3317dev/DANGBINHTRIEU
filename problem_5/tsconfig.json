@@ -2,13 +2,16 @@
   "compilerOptions": {
     "target": "es2020",
     "module": "commonjs",
+    "rootDir": ".",
     "outDir": "./dist",
-    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "sourceMap": true,
+    "removeComments": false
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["**/*.ts", "webapp/src/app/dashboard/page.tsx", "webapp/src/hooks/usePublic.tsx"],
+  "exclude": ["node_modules", "dist"]
 }

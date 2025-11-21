@@ -1,0 +1,21 @@
+
+version: '3.8'
+
+services:
+  app:
+    container_name: next-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env.local
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    profiles:
+      - next-app
+volumes:
+  db-data:

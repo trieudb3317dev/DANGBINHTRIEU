@@ -117,7 +117,7 @@ const categoryController = {
   // Create new category
   createCategory: async (req: Request, res: Response) => {
     try {
-      const { name, description, create_by } = req.body;
+      const { name, description, image, create_by } = req.body;
 
       const existingCategory = await Category.findOne({
         name,
@@ -136,6 +136,7 @@ const categoryController = {
 
       const newCategory = new Category({
         name,
+        image,
         description,
         create_by: user,
       });
@@ -150,10 +151,10 @@ const categoryController = {
   updateCategory: async (req: Request, res: Response) => {
     try {
       const categoryId = req.params.id;
-      const { name, description } = req.body;
+      const { name, description, image } = req.body;
       const updatedCategory = await Category.findByIdAndUpdate(
         categoryId,
-        { name, description },
+        { name, description, image },
         { new: true }
       );
       if (!updatedCategory) {

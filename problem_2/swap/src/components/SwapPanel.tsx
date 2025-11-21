@@ -13,7 +13,8 @@ interface Props {
   formatNumber: (n: number) => string;
   togglePreview: () => void;
   showPreview: boolean;
-  currencies: string[]; // <-- new
+  currencies: string[];
+  rateText: string;
 }
 
 const SwapPanel: React.FC<Props> = ({
@@ -29,6 +30,7 @@ const SwapPanel: React.FC<Props> = ({
   togglePreview,
   showPreview,
   currencies,
+  rateText,
 }) => {
   return (
     <div className="swap-panel preview-highlight">
@@ -62,7 +64,7 @@ const SwapPanel: React.FC<Props> = ({
       </div>
 
       <div className="panel-footer">
-        <div className="rate">1 VND = 0.00003792 USD</div>
+        <div className="rate">{rateText}</div>
         <button onClick={togglePreview} className="outline-btn">
           {showPreview ? 'Hide Details' : 'Preview Swap'}
         </button>

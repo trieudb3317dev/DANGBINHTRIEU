@@ -12,7 +12,9 @@ RUN npm install
 
 # copy source and build
 COPY . .
-RUN npm run build
+
+# Ensure TypeScript compiler uses server-only tsconfig
+RUN npx tsc -p tsconfig.server.json
 
 # Production stage
 FROM node:18-alpine

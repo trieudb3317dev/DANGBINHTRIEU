@@ -10,11 +10,11 @@ services:
       - "8080:8080"
     environment:
       - PORT=8080
-      - MONGO_URI=mongodb://mongo:27017/problem5
+      - MONGO_URI=mongodb+srv://truonghai9426_db_user:ykp5GBG8vKY2Xswv@cluster0.8xkiep8.mongodb.net/?appName=Cluster0
       # Add Cloudinary envs if used in app:
-      # - CLOUDINARY_CLOUD_NAME=your_cloud_name
-      # - CLOUDINARY_API_KEY=your_api_key
-      # - CLOUDINARY_API_SECRET=your_api_secret
+      - CLOUDINARY_CLOUD_NAME=dmdzyoslx
+      - CLOUDINARY_API_KEY=177942217816977
+      - CLOUDINARY_API_SECRET=OxgHlEmhu1323kxuucUbu9oWWyY
     depends_on:
       - mongo
 

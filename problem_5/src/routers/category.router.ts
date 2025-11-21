@@ -112,6 +112,8 @@ categoryRouter.get('/', categoryController.getAllCategories);
  *                 type: string
  *               description:
  *                 type: string
+ *               image:
+ *                 type: string
  *               create_by:
  *                 type: string
  *     responses:
@@ -147,6 +149,8 @@ categoryRouter.post('/', categoryController.createCategory);
  *               name:
  *                 type: string
  *               description:
+ *                 type: string
+ *               image:
  *                 type: string
  *     responses:
  *       '200':

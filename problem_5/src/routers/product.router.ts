@@ -112,6 +112,8 @@ productRouter.get('/', productController.getAllProducts);
  *                 type: string
  *               description:
  *                 type: string
+ *               image:
+ *                 type: string
  *               price:
  *                 type: number
  *               category:

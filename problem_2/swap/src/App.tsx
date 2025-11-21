@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import SwapPanel from './components/SwapPanel';
 import ConfirmPanel from './components/ConfirmPanel';
@@ -86,6 +86,29 @@ function App() {
     return () => ac.abort();
   }, []);
 
+  // helper: compute numeric rate (1 from = X to)
+  const computeRate = (from: string, to: string) => {
+    const priceFrom = prices[from] ?? (from === 'VND' ? VND_USD_FALLBACK : undefined);
+    const priceTo = prices[to] ?? (to === 'VND' ? VND_USD_FALLBACK : undefined);
+    if (priceFrom == null || priceTo == null) return NaN;
+    return priceFrom / priceTo;
+  };
+
+  const formatRate = (r: number) => {
+    if (!isFinite(r) || Number.isNaN(r)) return 'N/A';
+    const abs = Math.abs(r);
+    if (abs === 0) return '0';
+    if (abs < 0.00001) return r.toPrecision(6);
+    if (abs < 1) return r.toFixed(6);
+    if (abs < 100) return r.toFixed(4);
+    return r.toFixed(2);
+  };
+
+  // compute rateText for current pair
+  const currentRate = computeRate(fromCurrency, toCurrency);
+  const rateText =
+    Number.isNaN(currentRate) ? `1 ${fromCurrency} = ? ${toCurrency}` : `1 ${fromCurrency} = ${formatRate(currentRate)} ${toCurrency}`;
+
   // sync toAmount when fromAmount or prices or currencies change
   useEffect(() => {
     const priceFrom = prices[fromCurrency] ?? (fromCurrency === 'VND' ? VND_USD_FALLBACK : undefined);
@@ -144,6 +167,7 @@ function App() {
             togglePreview={togglePreview}
             showPreview={showPreview}
             currencies={currencies}
+            rateText={rateText}
           />
         ) : null}
         {showPreview && (
@@ -158,6 +182,7 @@ function App() {
             onBack={togglePreview}
             formatNumber={formatNumber}
             currencies={currencies}
+            rateText={rateText}
           />
         )}
 
